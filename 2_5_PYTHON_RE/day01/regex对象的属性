@@ -1,0 +1,25 @@
+# regex对象的属性
+
+```
+import re
+```
+
+```regex对象
+regex = re.compile(r"(ab)cd(?P<pig>ef)")
+```
+
+```1. 正则表达式
+print(regex.pattern)
+```
+
+```2. 功能扩展标志位
+print(regex.flags)
+```
+
+```3. 捕获组是第几组
+print(regex.groupindex)
+```
+
+```4. 有几个子组
+print(regex.groups)
+```

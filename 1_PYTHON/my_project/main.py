@@ -1,0 +1,80 @@
+# from my_project.skill_system.skill_deployer import SkillDeployer
+from skill_system.skill_deployer import *
+
+if __name__ == "__main__":
+    xlsbz = SkillDeployer("降龙十八掌")
+    xlsbz.generate_skill()
+
+    lmsj = SkillDeployer("六脉神剑")
+    lmsj.generate_skill()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

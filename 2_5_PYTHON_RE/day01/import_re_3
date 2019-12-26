@@ -1,0 +1,72 @@
+# re模块的功能函数,生成match对象的函数(finditer,fullmatch,match,search)
+
+```目标字符串
+string = "今年是2019年,建国70周年."
+```
+
+```正则表达式
+pattern = r"\d+"
+```
+
+## finditer
+
+re.finditer(pattern,string,flags=0)
+   + 功能：根据正则表达式匹配目标字符串
+   + 参数：
+      - pattern 正则表达式
+      - string 目标字符串
+      - flags 功能扩展标志位
+   + 返回值：match对象的可迭代对象
+
+```
+iterable_finditer = re.finditer(pattern,string)
+for item in iterable_finditer:
+    print(item)
+    print(item.group())
+```
+
+## fullmatch
+
+re.fullmatch(pattern,string,flags=0)
+   + 功能：完全匹配目标字符串
+   + 参数：
+      - pattern 正则表达式
+      - string 目标字符串
+      - flags 功能扩展标志位
+   + 返回值：match object
+
+```
+match_object_fullmatch = re.fullmatch(r"[,\.\w]+",string)
+print(match_object_fullmatch.group())
+```
+
+## match
+
+re.match(pattern,string,flags=0)
+   + 功能：匹配目标字符串开始位置
+   + 参数：
+      - pattern 正则表达式
+      - string 目标字符串
+      - flags 功能扩展标志位
+   + 返回值：match object 或 None
+
+```
+match_object_match = re.match(r"\w+?",string)
+print(match_object_match.group())
+```
+
+## search
+
+re.search(pattern,string,flags=0)
+   + 功能：匹配目标字符串第一个内容
+   + 参数：
+      - pattern 正则表达式
+      - string 目标字符串
+      - flags 功能扩展标志位
+   + 返回值：match object
+
+```
+match_object_search = re.search(r"\d+",string)
+print(match_object_search.group())
+```
+

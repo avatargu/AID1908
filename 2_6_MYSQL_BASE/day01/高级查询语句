@@ -1,0 +1,81 @@
+# 高级查询语句
+
+## 查询
+
+### 模糊查询
+
+> LIKE子句用于在WHERE子句中进行模糊查询
+
+> 百分号 % 表示任意0个或多个字符
+
+> 下划线 _ 表示任意1个字符
+
+> SELECT field1,field2,...,fieldN FROM table_name WHERE fieldM LIKE condition
+
+```例子
+select * from class where name like 'Q%';
+
+select * from interest where comment like '%第%';
+
+select * from interest where name like '______';
+```
+
+### 正则查询
+
+> REGEXP子句用于在WHERE子句中进行正则查询
+
+> 忽略字母大小写
+
+> SELECT field1,field2,...,fieldN FROM table_name WHERE fieldM REGEXP condition
+
+```例子
+select * from class where name regexp '^Q.+';
+```
+
+## 排序
+
+> ORDER BY子句用于设定按照哪个字段和哪种方式排序
+
+> ASC表示升序(默认)，DESC表示降序
+
+```例子
+select * from class order by age;
+
+select * from class where gender='w' order by age desc;
+```
+
+## 限制
+
+> LIMIT子句用于限制DELETE,UPDATE,SELECT语句的操作数量
+
+```例子
+delete from class where age=18 limit 1;
+
+update class set age=17 where age=18 limit 1;
+
+update class set age=18 where gender="m" limit 1;
+
+select * from class limit 1;
+
+select * from class where gender="m" order by 入学时间 limit 1;
+
+select * from marathon order by 成绩 limit 3;
+
+select * from class order by score desc limit 3;
+```
+
+## 联合查询
+
+> UNION操作符用于连接两个以上的SELECT语句的结果到一个集合中
+
+> DISTINCT:可选，删除结果集中的重复数据(默认)
+
+> ALL:可选，返回包含重复数据的结果集
+
+```
+select * from class where gender='w' UNION select * from class where age>25;
+select * from class where gender='w' or age>25;
+
+select * from class where gender='w' UNION ALL select * from class where age>25;
+```
+

@@ -1,0 +1,62 @@
+# flags
+
+```目标字符串
+string = """Hello
+北京
+"""
+```
+
+##  A == ASCII
+
+```元字符只能匹配ASCII编码（美式键盘编码）（元字符默认匹配UNICODE编码）
+regex = re.compile(r"\w+",flags=re.A)
+list_findall = regex.findall(string)
+print(list_findall)
+```
+
+##  I == IGNORECASE
+
+```忽略字母大小写
+regex = re.compile(r"[a-z]+",flags=re.I)
+list_findall = regex.findall(string)
+print(list_findall)
+```
+
+# S == DOTALL
+
+```使.可以匹配换行
+regex = re.compile(r".+",flags=re.S)
+list_findall = regex.findall(string)
+print(list_findall)
+```
+
+# M == MULTILINE
+
+```使^/$可以匹配每一行的开头/结尾位置（本来只是匹配目标字符串的开头/结尾位置）
+regex1 = re.compile(r"^北京",flags=re.M)
+regex2 = re.compile(r"Hello$",flags=re.M)
+list_findall_1 = regex1.findall(string)
+list_findall_2 = regex2.findall(string)
+print(list_findall_1)
+print(list_findall_2)
+```
+  
+# X == VERBOSE
+   
+```分行注释正则表达式
+pattern = r"""\w+ # 匹配Hello
+\s+ # 匹配换行
+\w+ # 匹配北京
+"""
+```
+
+```
+regex = re.compile(pattern,flags=re.X)
+list_findall = regex.findall(string)
+print(list_findall)
+```
+
+> 使用多个flags  
+> 使用按位或连接  
+> re.X | re.I
+

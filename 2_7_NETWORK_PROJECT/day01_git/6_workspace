@@ -1,0 +1,35 @@
+# 保存工作区
+
+1. 保存工作区内容
+
+```
+git status # 无文件要提交，干净的工作区
+
+git stash save "数据结构" # 保存工作区修改
+
+git status # 无文件要提交，干净的工作区
+```
+
+2. 查看工作区列表
+
+```
+git stash list
+```
+
+3. 应用工作区
+
+```
+git stash apply stash@{0}
+
+git add *
+
+git commit -m "alter readme.md"
+```
+
+4. 删除工作区
+
+```
+git stash drop stash@{1}
+
+git stash clear
+```

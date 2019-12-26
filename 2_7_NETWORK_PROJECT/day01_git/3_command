@@ -1,0 +1,75 @@
+# 基本命令
+
+1. 初始化仓库
+
+```
+git init
+```
+
+2. 查看本地仓库状态
+
+```
+git status
+```
+
+3. 从工作区到暂存区(add)
+
+```
+git add readme.md      # 单个文件
+git add a.py b.py # 多个文件
+git add *         # 所有文件
+
+git add folder # 文件夹
+git add . 　   # 当前文件夹
+
+git add .gitignore
+```
+
+4. 从暂存区到工作区(rm --cached)
+
+```
+git rm --cached readme.md
+```
+
+5. 从暂存区到仓库区(commit)
+
+```
+git commit readme.md -m "commit readme.md"
+
+git commit -m 'commit all files'
+```
+
+6. 查看commit日志
+
+```
+git log
+
+git log --pretty=oneline
+```
+
+7. 比较工作区文件和仓库区文件的差异
+
+```
+git diff
+
+git diff readme.md
+```
+
+8. 从仓库区到工作区(checkout)
+
+```
+git checkout -- readme.md
+
+rm a.py
+git checkout -- a.py
+```
+
+9. 从仓库区到暂存区(mv,rm)
+
+'''
+git mv b.py folder
+
+git rm a.py
+
+git commit -m 'rm and mv'
+'''

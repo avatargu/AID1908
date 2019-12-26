@@ -1,0 +1,87 @@
+# re模块的功能函数(findall,split,sub,subn)
+
+# findall
+
+re.findall(pattern,string,flags=0)
+   + 功能：根据正则表达式匹配目标字符串
+   + 参数：
+      - pattern 正则表达式
+      - string 目标字符串
+      - flags 功能扩展标志位
+   + 返回值：匹配到内容的列表，
+            若正则表达式有子组，
+            则只能获取到子组对应的内容列表
+   
+```
+list_findall = re.findall(pattern,string)
+print(list_findall)
+```
+
+> 结果：['Regular:2008', 'Expression:2011']
+
+```
+list_findall_1 = re.findall(pattern_1,string)
+print(list_findall_1)
+```
+
+> 结果：['2008', '2011']
+
+```
+list_findall_2 = re.findall(pattern_2,string)
+print(list_findall_2)
+```
+
+> 结果：[('Regular', '2008'), ('Expression', '2011')]
+
+# split
+
+re.split(pattern,string,flags=0)
+   + 功能：根据正则表达式切割目标字符串
+   + 参数：
+      - pattern 正则表达式
+      - string 目标字符串
+      - flags 功能扩展标志位
+   + 返回值：切割后内容的列表
+
+```
+list_split = re.split(r"[:,]",string)
+print(list_split)
+```
+
+# sub
+
+re.sub(pattern,replace,string,max,flags=0)
+   + 功能：使用一个字符串替换匹配到的内容
+   + 参数：
+      - pattern 正则表达式
+      - replace 替换字符串
+      - string 目标字符串
+      - max 最多替换几处，默认替换全部
+      - flags 功能扩展标志位
+   + 返回值：替换后的字符串
+
+```
+string_sub = re.sub(r":","-",string)
+string_sub_1 = re.sub(r":","-",string,1)
+print(string_sub)
+print(string_sub_1)
+```
+
+# subn
+
+re.subn(pattern,replace,string,max,flags=0)
+   + 功能：使用一个字符串替换匹配到的内容
+   + 参数：
+      - pattern 正则表达式
+      - replace 替换字符串
+      - string 目标字符串
+      - max 最多替换几处，默认替换全部
+      - flags 功能扩展标志位
+   + 返回值：替换后的字符串**和替换了几处**
+
+```
+string_subn = re.subn(r":","-",string)
+string_subn_1 = re.subn(r":","-",string,1)
+print(string_subn)
+print(string_subn_1)
+```

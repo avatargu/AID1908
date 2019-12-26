@@ -1,0 +1,76 @@
+# re模块的功能函数,生成regex对象的函数(compile)
+
+## 生成正则表达式对象
+
+regex = compile(pattern,flags=0)
+   + 功能：生成正则表达式对象
+   + 参数：
+      - pattern 正则表达式
+      - flags 功能扩展标志位
+   + 返回值：正则表达式对象
+
+```attributes of re
+import re
+print(dir(re))
+```
+
+```attributes of regex
+regex = re.compile(r"abc")
+print(dir(regex))
+```
+
+```目标字符串
+string = "Regular:2008,Expression:2011"
+```
+
+```正则表达式
+pattern = r"\w+:\d+"
+pattern_1 = r"\w+:(\d+)"
+pattern_2 = r"(\w+):(\d+)"
+```
+
+## re模块调用findall函数
+
+re.findall(pattern,string,flags=0)
+   + 功能：根据正则表达式匹配目标字符串
+   + 参数：
+      - pattern 正则表达式
+      - string 目标字符串
+      - flags 功能扩展标志位
+   + 返回值：匹配到内容的列表，
+            若正则表达式有子组，
+            则只能获取到子组对应的内容列表
+   
+```
+list_findall = re.findall(pattern,string)
+print(list_findall)
+list_findall_1 = re.findall(pattern_1,string)
+print(list_findall_1)
+list_findall_2 = re.findall(pattern_2,string)
+print(list_findall_2)
+```
+
+## compile对象调用findall函数
+
+regex.findall(string,pos,endpos)
+   + 功能：根据正则表达式匹配目标字符串
+   + 参数：
+      - string 目标字符串
+      - pos 指定目标字符串的匹配开始位置(包括)
+      - endpos 指定目标字符串的匹配结束位置(不包括)
+   + 返回值：匹配到内容的列表，
+            若正则表达式有子组，
+            则只能获取到子组对应的内容列表
+            
+```
+regex = re.compile(pattern)
+list_whole = regex.findall(string)
+print(list_whole)
+```
+
+```
+regex = re.compile(pattern)
+list_parts = regex.findall(string,0,9)
+print(list_parts)
+```
+

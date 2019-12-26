@@ -1,0 +1,97 @@
+# match对象的属性
+
+```
+import re
+```
+
+```正则表达式
+pattern = r"(ab)cd(?P<pig>ef)"
+```
+
+```regex对象
+regex = re.compile(pattern)
+```
+
+```match对象
+match_object_search = regex.search("abcdefghi")
+match_object_search_1 = regex.search("abcdefghi",0,9)
+```
+
+## 属性变量
+
+```1. 目标字符串开始位置(包括)
+print(match_object_search.pos)
+```
+
+```2. 目标字符串结束位置(不包括)
+print(match_object_search.endpos)
+```
+
+```3. 正则表达式
+print(match_object_search.re)
+```
+
+```4. 目标字符串
+print(match_object_search.string)
+```
+
+```5. 最后一组的名称（若无则None）
+print(match_object_search.lastgroup)
+```
+
+```6. 最后一组的序号
+print(match_object_search.lastindex)
+```
+
+## 属性方法（均无参）
+
+### 第一组
+
+```1. 匹配内容在目标字符串中的开始和结束位置
+print(match_object_search.span())
+```
+
+```2. 匹配内容在目标字符串中的开始位置(包括)
+print(match_object_search.start())
+```
+
+```3. 匹配内容在目标字符串中的结束位置(不包括)
+print(match_object_search.end())
+```
+
+### 第二组
+
+```1. 获取捕获组字典，组名为键，对应内容为值
+print(match_object_search.groupdict())
+```
+
+```2. 获取子组对应内容元组
+print(match_object_search.groups())
+```
+
+### 第三组
+
+```1. 参数默认为0，获取整个正则表达式匹配到的内容
+print(match_object_search.group())
+```
+
+> 结果：abcdef
+
+```2. 参数是序号，获取对应子组匹配到的内容
+print(match_object_search.group(1))
+```
+
+> 结果：ab
+
+```3. 参数是序号，获取对应子组匹配到的内容
+print(match_object_search.group(2))
+```
+
+> 结果：ef
+
+```4. 参数是组名，获取对应子组匹配到的内容
+print(match_object_search.group("pig"))
+```
+
+> 结果：ef
+

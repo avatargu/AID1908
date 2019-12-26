@@ -1,0 +1,80 @@
+# 版本控制
+
+## 后退
+
+1. 退回到上一个commit节点(git log)
+
+```
+ls
+git log
+git reset --hard HEAD^ 
+ls
+git log
+```
+
+```
+ls
+git log
+git reset --hard HEAD^^
+ls
+git log
+```
+
+2. 退回到指定的commit节点(git log)
+
+```
+ls
+git log
+git reset --hard 520521a
+ls
+git log
+```
+
+## 前进
+
+3. 前进到指定的commit节点(git reflog)
+
+```
+ls
+git reflog
+git reset --hard 520521a
+ls
+git log
+```
+
+## 标签
+
+4. 创建标签
+
+```
+git tag v1.0 -m "版本1.0"
+git tag
+git show v1.0
+q
+```
+
+```
+git log --pretty=oneline
+git tag v0.9 520521a -m "版本0.9"
+git tag
+git show v1.0
+q
+```
+
+5. 去往标签
+
+```
+ls 
+git reset --hard v0.9
+ls
+git reset --hard v1.0
+ls
+```
+
+6. 删除标签
+
+```
+git tag
+git tag -d v0.9
+git tag
+```
