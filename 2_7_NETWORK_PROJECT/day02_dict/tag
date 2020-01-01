@@ -1,0 +1,21 @@
+cd day02
+mysql -uroot -p
+use dict
+
+show tables;
+create table user (id int primary key auto_increment,
+                   name varchar(32) not null,
+                   passwd varchar(128) not null);
+show tables; 
+create table hist (id int primary key auto_increment,
+                   name varchar(32) not null,
+                   word varchar(28) not null,
+                   time datetime default now());
+show tables;                           
+                  
+select * from user;
+select * from hist;
+                  
+                  
+                  
+                  

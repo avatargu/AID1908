@@ -1,6 +1,6 @@
 # 启动和连接MySQL服务
 
-## 服务端启动
+## 服务端启动(密码：tarena)
 
 ```
 sudo /etc/init.d/mysql status  
@@ -9,7 +9,7 @@ sudo /etc/init.d/mysql stop
 sudo /etc/init.d/mysql restart
 ```
 
-## 客户端连接
+## 客户端连接(密码：123456)
 
 * mysql -h主机地址 -u用户名 -p密码
 

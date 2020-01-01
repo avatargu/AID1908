@@ -9,7 +9,7 @@ from time import sleep
 
 # 只有父进程执行
 a = 0
-print("在fork之前：a=", a)
+print("在fork之前：a =", a)
 
 # ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 # 创建子进程
@@ -44,3 +44,5 @@ print("在if之后：a=", a)
 # 父子进程的退出互相独立
 # os._exit(0) # 退出进程
 sys.exit("退出进程")
+
+# print("unreachable")

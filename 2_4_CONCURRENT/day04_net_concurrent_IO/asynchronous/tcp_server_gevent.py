@@ -4,6 +4,8 @@
 思路：
     1. 定义对每个客户端发送消息请求的处理行为为协程函数
     2. 转换socket模块中所有的IO阻塞为可以触发gevent协程跳转的IO阻塞
+
+类似于硬件DMA
 """
 import gevent
 from gevent import monkey

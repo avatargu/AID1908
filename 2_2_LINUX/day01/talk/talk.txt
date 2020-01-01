@@ -1,0 +1,8 @@
+zhangsan:lisi
+wangwu:hello
+lisi:wangwu
+zhaoliu:world
+wangwu:zhaoliu
+zhangsan:hi
+zhaoliu:zhangsan
+lisi:Beijing
