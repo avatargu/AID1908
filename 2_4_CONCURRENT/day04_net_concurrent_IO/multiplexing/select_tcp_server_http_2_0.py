@@ -118,7 +118,7 @@ class HTTPServer:
             self.get_data(connfd,info)
 
     # 启动服务，相当于main()函数
-    def server_forever(self):
+    def serve_forever(self):
         self.sockfd.listen(8) # 设置监听
         print("Listening port %d"%self.port)
 
@@ -147,4 +147,4 @@ if __name__ == "__main__":
     DIR = "/home/tarena/static" # 用户网页存储位置
 
     http_server = HTTPServer(HOST,PORT,DIR)
-    http_server.server_forever() # 启动服务
+    http_server.serve_forever() # 启动服务

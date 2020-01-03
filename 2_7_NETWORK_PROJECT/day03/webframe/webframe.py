@@ -1,29 +1,21 @@
 """
-模拟网站的后端应用
-
-从httpserver接收具体请求
-根据请求获取网页
-将需要的数据反馈给httpserver
+模拟网站后端应用工作流程
 """
-
 from socket import *
+from select import select
 import json
 from settings import *
-from select import *
 from urls import *
-from multiprocessing import Process
 
-
-# 应用类,实现具体的后端功能
+# 应用类
 class Application:
     def __init__(self):
+        self.rlist = []
+        self.wlist = []
+        self.xlist = []
+
         self.host = frame_ip
         self.port = frame_port
-
-        # self.fdmap = {} # 查找地图
-        # self.ep = epoll() # epoll对象
-
-        # p = Process(target=self.handle,args = (connfd,))
 
         self.sockfd = socket()
         self.sockfd.setsockopt(SOL_SOCKET,
@@ -31,77 +23,72 @@ class Application:
                                DEBUG)
         self.sockfd.bind((self.host,self.port))
 
-    # 用于服务启动
+    # 启动服务
     def start(self):
         self.sockfd.listen(8)
-        print("Listen the port %d"%self.port)
+        print("Listening port %d"%self.port)        
 
-        connfd,addr = self.sockfd.accept()
+        self.rlist.append(self.sockfd)
+        
+        while True:
+            rs,ws,xs = select(self.rlist,
+                              self.wlist,
+                              self.xlist)
 
-        p = Process(target=self.handle,args = (connfd,))
+            for r in rs:
+                if r is self.sockfd: # sockfd
+                    print("Waiting for connection ...")
+                    connfd,addr = r.accept()
+                    print("Connected from", addr)
+                                       
+                    self.rlist.append(connfd) # 关注新的IO事件
+                else: # connfd
+                    self.handle(r)
+                    
+                    self.rlist.remove(r) # 已经关闭，取消关注
 
-        p.start()
-
-        # 关注sockfd
-        # self.ep.register(self.sockfd,EPOLLIN)
-        # self.fdmap[self.sockfd.fileno()] = self.sockfd
-
-        # while True:
-        #     events = self.ep.poll()
-        #     for fd,event in events:
-        #         if fd == self.sockfd.fileno():
-        #             connfd,addr = self.fdmap[fd].accept()
-        #             self.ep.register(connfd)
-        #             self.fdmap[connfd.fileno()] = connfd
-        #         else:
-        #             self.handle(self.fdmap[fd])
-        #             self.ep.unregister(fd)
-        #             del self.fdmap[fd]
-
-    # 具体处理请求
+    # 具体处理httpserver请求
     def handle(self,connfd):
-        request = connfd.recv(1024).decode()
-        request = json.loads(request)
-        # request -> {'method':'GET','info':'/'}
-        if request['method'] == 'GET':
-            if request['info'] == '/' or \
-                    request['info'][-5:] == '.html':
-                response = self.get_html(request['info'])
+        json_request = connfd.recv(1024).decode()
+        dict_request = json.loads(json_request)
+        
+        if dict_request["method"] == "GET":
+            if dict_request["info"] == "/" or dict_request["info"][-5:] == ".html":
+                dict_response = self.get_html(dict_request["info"])
             else:
-                response = self.get_data(request['info'])
-        elif request['method'] == 'POST':
+                dict_response = self.get_data(dict_request["info"])
+        elif dict_request["method"] == "POST":
             pass
-        # 将数据发送给HTTPserver
-        response = json.dumps(response)
-        connfd.send(response.encode())
-        connfd.close()
+        
+        json_response = json.dumps(dict_response)
+        connfd.send(json_response.encode())
+        
+        connfd.close() # 关闭套接字
 
-    # 网页处理函数
+    # 处理网页
     def get_html(self,info):
-        if info == '/':
-            filename = STATIC_DIR+'/index.html'
+        if info == "/":
+            filename = STATIC_DIR+"/index.html"
         else:
             filename = STATIC_DIR+info
 
         try:
             fd = open(filename)
-        except:
-            f = open(STATIC_DIR+'/404.html')
-            return {'status':'404','data':f.read()}
+        except Exception as e:
+            print(e)
+            fd = open(STATIC_DIR+"/404.html")
+            return {"status":"404","data":fd.read()}
         else:
-            return {'status':'200','data':fd.read()}
+            return {"status":"200","data":fd.read()}
 
     # 处理数据
     def get_data(self,info):
         for url,func in urls:
             if url == info:
-                return {'status':'200','data':func()}
-        return {'status':'404','data':'Sorry...'}
+                return {"status":"200","data":func()}
 
-if __name__ == '__main__':
+        return {"status":"404","data":"Sorry ..."}
+
+if __name__ == "__main__":
     app = Application()
-    app.start()
-
-
-
-
+    app.start() # 启动服务（serve_forever, start or run）
